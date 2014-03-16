@@ -14,6 +14,11 @@ oferta:
     resource: "@OfertaBundle/Resources/config/routing.yml"
     prefix:   /
 # app/config/routing.yml
-pagina_ayuda:
-    path: /ayuda
-    defaults: { _controller: OfertaBundle:Default:ayuda }
+pagina_estatica:
+    path:    /sitio/{pagina}
+    defaults: { _controller: OfertaBundle:Sitio:estatica }
+
+_pagina_estatica:
+    path:    /sitio/{pagina}/
+    defaults: { _controller: OfertaBundle:Sitio:estatica 
+                     route: pagina_estatica, permanent:true }
