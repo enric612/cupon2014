@@ -1,0 +1,16 @@
+usuario:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tienda:
+    resource: "@TiendaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ciudad:
+    resource: "@CiudadBundle/Resources/config/routing.yml"
+    prefix:   /
+
+oferta:
+    resource: "@OfertaBundle/Resources/config/routing.yml"
+    prefix:   /
+
