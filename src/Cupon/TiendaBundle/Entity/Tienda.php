@@ -3,6 +3,7 @@ namespace Cupon\TiendaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Cupon\TiendaBundle\Util\Util;
 
 /**
  * @ORM\Entity
@@ -72,6 +73,7 @@ class Tienda
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+        $this->slug = Util::getSlug($nombre);
 
         return $this;
     }

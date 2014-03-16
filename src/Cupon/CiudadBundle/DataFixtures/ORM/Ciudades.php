@@ -4,15 +4,16 @@ namespace Cupon\CiudadBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Cupon\CiudadBundle\Entity\Ciudad;
+use Cupon\CiudadBundle\Util\Util;
 
 class Ciudades implements FixtureInterface
 {
 	public function load( ObjectManager $manager ) {
 		$ciudades = array(
-			array( 'nombre' => 'Madrid', 'slug' => 'madrid' ),
-			array( 'nombre' => 'Barcelona', 'slug' => 'barcelona' ),
-			array( 'nombre' => 'Xeraco', 'slug' => 'xeraco' ),
-			array( 'nombre' => 'Gandia', 'slug' => 'gandia' ),
+			array( 'nombre' => 'Madrid', ),
+			array( 'nombre' => 'Barcelona', ),
+			array( 'nombre' => 'Xeraco', ),
+			array( 'nombre' => 'Gandia', ),
 			// ...
 		);
 		// Para cada ciudad ...
@@ -23,7 +24,7 @@ class Ciudades implements FixtureInterface
 
 			// Atributos del objeto tipo Ciudad
 			$entidad->setNombre( $ciudad['nombre'] ); 
-			$entidad->setSlug( $ciudad['slug'] );
+			
 
 			// Guarda el objeto en memoria (Ojo no se inserta en la bd)		
 			$manager->persist( $entidad ); 
