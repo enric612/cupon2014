@@ -1,6 +1,6 @@
-// src/Cupon/OfertaBundle/Entity/Venta.php
 <?php
 namespace Cupon\OfertaBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 /** @ORM\Entity */
 class Venta {

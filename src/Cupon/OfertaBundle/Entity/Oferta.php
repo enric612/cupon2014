@@ -111,12 +111,12 @@ class Oferta
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cupon\CiudadBundle\Enitity\Ciudad")
+     * @ORM\ManyToOne(targetEntity="Cupon\CiudadBundle\Entity\Ciudad")
      */
     private $ciudad;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cupon\TiendaBundle\Enity\Tienda")
+     * @ORM\ManyToOne(targetEntity="Cupon\TiendaBundle\Entity\Tienda")
      */
     private $tienda;
 
