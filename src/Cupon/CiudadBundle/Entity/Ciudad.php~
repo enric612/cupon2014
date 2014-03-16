@@ -1,0 +1,35 @@
+<?php
+
+namespace Cupon\CiudadBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
+/**
+ * @ORM\Entity
+ */
+class Ciudad
+{
+	public function __toString()
+	{
+		return $this->getNombre();
+	}
+
+    /**
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $nombre;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $slug;
+
+}
