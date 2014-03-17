@@ -1,5 +1,5 @@
 <?php
-namespace Cupon\OfertaBundle\Util;
+namespace Cupon\TiendaBundle\Util;
 
 class Util{
 
