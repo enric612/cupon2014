@@ -1,3 +1,4 @@
-ciudad_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CiudadBundle:Default:index }
+#Cambiar de ciudad
+ciudad_cambiar:
+    path: /ciudad/cambiar-a-{ciudad}
+    defaults: { _controller: CiudadBundle:Default:cambiar}

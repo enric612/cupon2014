@@ -31,3 +31,4 @@ portada:
 _portada:
     path: /
     defaults: { _controller:FrameworkBundle:Redirect:redirect,route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
+
