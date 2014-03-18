@@ -22,7 +22,12 @@ _pagina_estatica:
     path:    /sitio/{pagina}/
     defaults: { _controller: FrameworkBundle:Redirect:redirect,route: pagina_estatica, permanent:true }
 
-# app/config/routing.yml
+# Ruta completa de la portada (con el slug de la ciudad)
 portada:
-    path: /
+    path: /{ciudad}
     defaults: { _controller: OfertaBundle:Default:portada }
+
+#Ruta simple de la portada
+_portada:
+    path: /
+    defaults: { _controller:FrameworkBundle:Redirect:redirect,route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
