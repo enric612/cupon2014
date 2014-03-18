@@ -12,13 +12,7 @@ class OfertaRepository extends EntityRepository
 
 		$em = $this->getEntityManager();
 
-		$dql = 'SELECT o, c, t
-						FROM OfertaBundle:Oferta o
-						JOIN o.ciudad c JOIN o.tienda t
-						WHERE o.revisada = true
-						AND o.fechaPublicacion < :fecha
-						AND c.slug = :ciudad
-						ORDER BY o.fechaPublicacion DESC';
+		$dql = 'SELECT o, c, t FROM OfertaBundle:Oferta o JOIN o.ciudad c JOIN o.tienda t WHERE o.revisada = true AND o.fechaPublicacion < :fecha AND c.slug = :ciudad ORDER BY o.fechaPublicacion DESC';
 
 		$consulta = $em->createQuery($dql);
 		$consulta->setParameter('fecha', $fechaPublicacion);
