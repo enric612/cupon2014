@@ -21,3 +21,8 @@ pagina_estatica:
 _pagina_estatica:
     path:    /sitio/{pagina}/
     defaults: { _controller: FrameworkBundle:Redirect:redirect,route: pagina_estatica, permanent:true }
+
+# app/config/routing.yml
+portada:
+    path: /
+    defaults: { _controller: OfertaBundle:Default:portada }
