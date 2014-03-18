@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+{% set ciudadSeleccionada = app.request.attributes.has('ciudad')
+? app.request.attributes.get('ciudad')
+: ciudad_por_defecto %}
+{% block body %}
+		<header>
+			<h1><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada })
+}}">CUPON</a></h1>
+			<nav>
+				<ul>
+					<li><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada })
+}}">Oferta del día</a></li>
+					<li><a href="#">Ofertas recientes</a></li>
+					<li><a href="#">Mis ofertas</a></li>
+				</ul>
+			</nav>
+		</header>
+		<article>
+		{% block article %}{% endblock %}
+		</article>
+		<aside>
+			{% block aside %}{% endblock %}
+		</aside>
+{% endblock %}

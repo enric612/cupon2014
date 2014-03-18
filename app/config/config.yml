@@ -70,4 +70,4 @@ swiftmailer:
 
 # Parametros de la app 
 parameters:
-    cupon.ciudad_por_defecto: '1'
+    cupon.ciudad_por_defecto: 'barcelona'
