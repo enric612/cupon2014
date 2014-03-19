@@ -1,0 +1,23 @@
+<select id="ciudadseleccionada">
+	{% for ciudad in ciudades %}
+		<option value="{{ ciudad.slug }}"data-url="{{ url('ciudad_cambiar', { 'ciudad': ciudad.slug }) }}">{{ ciudad.nombre }}</option>
+	{% endfor %}
+</select>
+<script type="text/javascript">
+	var lista = document.getElementById('ciudadseleccionada');
+	
+	lista.onchange = function() {
+		var url = lista.options[lista.selectedIndex].getAttribute('data-url');
+
+		window.location = url;
+	};
+
+	window.onload = function()
+	{
+		var pathArray;
+        pathArray = window.location.pathname.split( '/' );
+		var ciudad;
+		ciudad = pathArray[2];
+		opcion = document.getElementById('ciudadseleccionada').value=ciudad;
+	}
+</script>

@@ -14,4 +14,14 @@ class DefaultController extends Controller
     		array('ciudad' => $ciudad)
     	));
     }
+    public function listaCiudadesAction()
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$ciudades = $em->getRepository('CiudadBundle:Ciudad')->findAll();
+
+    	return $this->render(
+    		'CiudadBundle:Default:listaCiudades.html.twig',
+    		array('ciudades' => $ciudades)
+    		);
+    }
 }
