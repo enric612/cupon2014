@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
-{% set ciudadSeleccionada = app.request.attributes.has('ciudad')
-? app.request.attributes.get('ciudad')
-: ciudad_por_defecto %}
+{% set ciudadSeleccionada = app.request.attributes.get('ciudad',
+ciudad_por_defecto) %}
+
 {% block stylesheets %}
 		<link href="{{ asset('bundles/oferta/css/comun.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('bundles/oferta/css/frontend.css') }}" rel="stylesheet" type="text/css" />

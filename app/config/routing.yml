@@ -32,3 +32,7 @@ _portada:
     path: /
     defaults: { _controller:FrameworkBundle:Redirect:redirect,route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
 
+# Ruta de vison de las ofertas
+oferta:
+    path: /{ciudad}/ofertas/{slug}
+    defaults: {_controller: OfertaBundle:Default:oferta}

@@ -27,4 +27,23 @@ class OfertaRepository extends EntityRepository
 
 		return $consulta->getSingleResult();
 	}
+	public function findOferta($ciudad,$slug)
+	{
+		$em = $this->getEntityManager();
+
+		$dql = 'SELECT o, c, t
+				FROM OfertaBundle:Oferta o
+				JOIN o.ciudad c JOIN  o.tienda t
+				WHERE o.slug = :slug
+				AND c.slug = :ciudad';
+
+		$consulta = $em->createQuery($dql);
+		$consulta->setParameter('ciudad',$ciudad);
+		$consulta->setParameter('slug',$slug);
+		$consulta->setMaxResults(1);
+
+		return $consulta->getSingleResult();
+
+	}
+
 }

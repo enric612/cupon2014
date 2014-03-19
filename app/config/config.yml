@@ -28,6 +28,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        ciudad_por_defecto: 'barcelona'
 
 # Assetic Configuration
 assetic:
