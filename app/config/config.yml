@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -73,3 +74,4 @@ swiftmailer:
 # Parametros de la app 
 parameters:
     cupon.ciudad_por_defecto: 'barcelona'
+

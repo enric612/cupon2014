@@ -2,12 +2,12 @@
 					<h1>
 					 	<a href="#"> {{oferta.nombre}} </a> 
 					</h1>
-					{{oferta.descripcion}} <a class="boton" href="#">Comprar</a> 
+					{{oferta.descripcion | truncate(100, true)  }} <a class="boton" href="#">Comprar</a> 
 				</section>
 				<section class="galeria">
 					<img alt="Fotografía de la oferta" src="{{asset('uploads/images'~oferta.rutaFoto)}}"> 
 					<p class="precio">
-						 {{oferta.precio}} &euro;<span>{{oferta.descuento}}</span> 
+						 {{oferta.precio}} &euro;<span>{{ descuento(oferta.precio, oferta.descuento)}}</span> 
 					</p>
 					<p>
 						 <strong>Condiciones:</strong> {{oferta.condiciones}}
@@ -40,5 +40,5 @@
 				<section class="tienda">
 					<h2>
 						 Sobre la tienda 
-					</h2>{{oferta.tienda.descripcion}}
+					</h2>{{oferta.tienda.descripcion | wordwrap(40) | nl2br }}
 				</section>
