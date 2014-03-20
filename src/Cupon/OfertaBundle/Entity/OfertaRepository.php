@@ -34,7 +34,8 @@ class OfertaRepository extends EntityRepository
 		$dql = 'SELECT o, c, t
 				FROM OfertaBundle:Oferta o
 				JOIN o.ciudad c JOIN  o.tienda t
-				WHERE o.slug = :slug
+				WHERE o.revisada = true
+				AND o.slug = :slug
 				AND c.slug = :ciudad';
 
 		$consulta = $em->createQuery($dql);
@@ -45,5 +46,23 @@ class OfertaRepository extends EntityRepository
 		return $consulta->getSingleResult();
 
 	}
+	public function findRelacionadas($ciudad)
+	{
+		$em = $this->getEntityManager();
+		$dql = 'SELECT o, c
+				FROM OfertaBundle:Oferta o
+				JOIN o.ciudad c
+				WHERE o.revisada = true
+				AND o.fechaPublicacion <= :fecha
+				AND c.slug != :ciudad
+				ORDER BY o.fechaPublicacion DESC';
 
+		$fechaActual = new \DateTime('today');
+		$consulta = $em->createQuery($dql);
+		$consulta->setParameter('fecha',$fechaActual);
+		$consulta->setParameter('ciudad',$ciudad);
+		$consulta->setMaxResults(5);
+
+		return $consulta->getResult();
+	}
 }

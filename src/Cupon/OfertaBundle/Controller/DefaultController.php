@@ -12,6 +12,7 @@ class DefaultController extends Controller
 	{
 		$em = $this->getDoctrine()->getManager();
 		$oferta = $em->getRepository('OfertaBundle:Oferta')->findOfertaDelDia($ciudad);
+		$relacionadas = $em->getRepository('OfertaBundle:Oferta')->findRelacionadas($ciudad);
 		
 		if(!$oferta){
 			throw $this->createNotFoundException(
@@ -21,8 +22,10 @@ class DefaultController extends Controller
 		}
 
 		return $this->render(
-			'OfertaBundle:Default:portada.html.twig',
-			array('oferta' => $oferta,
+			'OfertaBundle:Default:detalle.html.twig',
+			array(
+				'oferta' => $oferta,
+				'relacionadas' => $relacionadas
 				)
 			);
 	}
