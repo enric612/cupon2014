@@ -2,3 +2,8 @@
 ciudad_cambiar:
     path: /ciudad/cambiar-a-{ciudad}
     defaults: { _controller: CiudadBundle:Default:cambiar}
+
+#Ofertas recientes de una ciudad
+ciudad_recientes:
+    path: /{ciudad}/recientes
+    defaults: { _controller: CiudadBundle:Default:recientes }

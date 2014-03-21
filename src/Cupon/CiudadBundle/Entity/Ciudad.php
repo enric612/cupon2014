@@ -9,7 +9,7 @@ use Cupon\CiudadBundle\Util\Util;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cupon\CiudadBundle\Entity\CiudadRepository")
  */
 class Ciudad
 {
