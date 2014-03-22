@@ -74,7 +74,7 @@ class OfertaRepository extends EntityRepository
 			FROM OfertaBundle:Oferta o
 			JOIN o.tienda t
 			WHERE o.revisada = true
-			AND o.fechaPublicacion < :fecha
+			AND o.fechaPublicacion <= :fecha
 			AND o.ciudad = :id
 			ORDER BY o.fechaPublicacion DESC');
 		$consulta->setMaxResults(5);

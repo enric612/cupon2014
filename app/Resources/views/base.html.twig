@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}{% endblock %} | Cupon</title>
         {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
         
     </head>
     <body id="{% block id '' %}"><div id="contenedor">
@@ -18,6 +19,6 @@
             <a href="{{ path('pagina_estatica', { 'pagina': 'sobre-nosotros' })
             }}">Sobre nosotros</a>
         </footer>
-        {% block javascripts %}{% endblock %}
+        
     </div></body>
 </html>

@@ -7,6 +7,18 @@ ciudad_por_defecto) %}
         <link href="{{ asset('bundles/oferta/css/frontend.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('bundles/oferta/css/normalizar.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
+
+{% block javascripts %}
+{% javascripts '@OfertaBundle/Resources/public/js/lt_ie9/*' output='js/lt_ie9.js' %}
+<!--[if lt IE 9]>
+    <script src="{{ asset_url }}"></script>
+<![endif]-->
+{% endjavascripts %}  
+{% javascripts '@OfertaBundle/Resources/public/js/frontend/*' output='js/frontend.js' %}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% endblock %}
+
 {% set ciudadSeleccionada = app.request.attributes.has('ciudad')
 ? app.request.attributes.get('ciudad')
 : ciudad_por_defecto %}

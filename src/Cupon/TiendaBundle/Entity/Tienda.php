@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Cupon\TiendaBundle\Util\Util;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cupon\TiendaBundle\Entity\TiendaRepository")
  */
 class Tienda
 {
