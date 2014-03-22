@@ -6,7 +6,10 @@ security:
         frontend:
             pattern:        ^/*
             anonymous:      ~
-            form_login:     ~
+            form_login:
+                login_path: usuario_login
+                check_path: usuario_login_check
+
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
