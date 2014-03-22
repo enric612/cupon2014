@@ -23,6 +23,22 @@ class DefaultController extends Controller
 		));
 	}
 
+	 public function cajaLoginAction()
+	{
+		$peticion = $this->getRequest();
+		$sesion = $peticion->getSession();
+
+		$error = $peticion->attributes->get(
+			SecurityContext::AUTHENTICATION_ERROR,
+			$sesion->get(SecurityContext::AUTHENTICATION_ERROR)
+		);
+
+		return $this->render('UsuarioBundle:Default:cajalogin.html.twig', array(
+			'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
+			'error' => $error
+		));
+	}
+
     public function comprasAction()
     {
         $usuario_id = 1;

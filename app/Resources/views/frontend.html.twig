@@ -40,6 +40,10 @@ ciudad_por_defecto) %}
 		{% block article %}{% endblock %}
 		</article>
 		<aside>
-			{% block aside %}{% endblock %}
+			{% block aside %}
+				<section id="login">
+					{{ render(controller('UsuarioBundle:Default:cajaLogin')) }}
+				</section>
+			{% endblock %}
 		</aside>
 {% endblock %}

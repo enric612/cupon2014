@@ -21,4 +21,4 @@ security:
             entity: { class: Cupon\UsuarioBundle\Entity\Usuario, property: email }
 
     encoders:
-        Cupon\UsuarioBundle\Entity\Usuario: { algorithm: sha512, iterations: 10 }
+        Cupon\UsuarioBundle\Entity\Usuario: plaintext
