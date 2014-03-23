@@ -5,52 +5,61 @@ namespace Cupon\UsuarioBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Cupon\OfertaBundle\Entity\Oferta;
 use Cupon\CiudadBundle\Entity\Ciudad;
 use Cupon\TiendaBundle\Entity\Tienda;
 use Cupon\UsuarioBundle\Entity\Usuario;
 
-class Usuarios extends AbstractFixture implements OrderedFixtureInterface
+class Usuarios extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 	public function getOrder(){
         return 4;
     }
+
+    private $container;
+    
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+    
     public function load(ObjectManager $manager)
     {
-    	// Obtener todas las ciudades de la base de datos
+        // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
-        $i = 1;
-        foreach ($ciudades as $ciudad) 
-        {
-        	for ($j=1;$j<26;$j++)
-        	{
-        		$usuario = new Usuario();
-        		$usuario->setNombre($this->getNombre());
-	            $usuario->setApellidos($this->getApellidos());
-	            $usuario->setEmail('usuario'.$i.'@localhost');
 
-	            $usuario->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+        for ($i=1; $i<=500; $i++) {
+            $usuario = new Usuario();
 
-	            $passwordEnClaro = 'usuario'.$i;
-	            $usuario->setPassword($passwordEnClaro);
-	            $usuario->setDireccion($this->getDireccion($ciudad));
-            	$usuario->setCiudad($ciudad);
-            	// El 60% de los usuarios permite email
-	            $usuario->setPermiteEmail((rand(1, 1000) % 10) < 6);
+            $usuario->setNombre($this->getNombre());
+            $usuario->setApellidos($this->getApellidos());
+            $usuario->setEmail('usuario'.$i.'@localhost');
 
-	            $usuario->setFechaAlta(new \DateTime('now - '.rand(1, 150).' days'));
-	            $usuario->setFechaNacimiento(new \DateTime('now - '.rand(7000, 20000).' days'));
+            $usuario->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
 
-	            $dni = substr(rand(), 0, 8);
-	            $usuario->setDni($dni.substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($dni, "XYZ", "012")%23, 1));
+            $passwordEnClaro = 'usuario'.$i;
+            $encoder = $this->container->get('security.encoder_factory')->getEncoder($usuario);
+            $passwordCodificado = $encoder->encodePassword($passwordEnClaro, $usuario->getSalt());
+            $usuario->setPassword($passwordCodificado);
 
-	            $usuario->setNumeroTarjeta('1234567890123456');
-	            $i++;
+            $ciudad = $ciudades[array_rand($ciudades)];
+            $usuario->setDireccion($this->getDireccion($ciudad));
+            $usuario->setCiudad($ciudad);
 
-	            $manager->persist($usuario);
+            // El 60% de los usuarios permite email
+            $usuario->setPermiteEmail((rand(1, 1000) % 10) < 6);
 
-        	}
-        	
+            $usuario->setFechaAlta(new \DateTime('now - '.rand(1, 150).' days'));
+            $usuario->setFechaNacimiento(new \DateTime('now - '.rand(7000, 20000).' days'));
+
+            $dni = substr(rand(), 0, 8);
+            $usuario->setDni($dni.substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($dni, "XYZ", "012")%23, 1));
+
+            $usuario->setNumeroTarjeta('1234567890123456');
+
+            $manager->persist($usuario);
         }
 
         $manager->flush();

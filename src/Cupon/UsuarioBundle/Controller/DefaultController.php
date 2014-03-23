@@ -7,6 +7,20 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller
 {
+    public function defaultAction()
+    {
+        $usuario = new Usuario();
+        $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
+        
+        $password = $encoder->encodePassword(
+            'la-contraseña-en-claro',
+            $usuario->getSalt()
+        );
+
+        $usuario->setPassword($password);
+
+    }
+
     public function loginAction()
 	{
 		$peticion = $this->getRequest();

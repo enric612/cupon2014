@@ -1,3 +1,10 @@
+{# el usuario está logueado #}
+{% if is_granted('ROLE_USUARIO') %}
+<p>Conectado como {{ app.user }}</p>
+<a href="#">Ver mi perfil</a>
+<a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
+{# el usuario todavía no ha hecho login #}
+{% else %}
 <h2>Accede a tu cuenta</h2>
 <form action="{{ path('usuario_login_check') }}" method="post">
 	{% if error %}
@@ -9,4 +16,8 @@
 	<label for="login_pass">Contraseña</label>
 	<input id="login_pass" type="password" name="_password" />
 	<input type="submit" value="Entrar" />
+	<input type="checkbox" id="no_cerrar" name="_remember_me" checked />
+	<label for="no_cerrar">No cerrar sesión</label>
+	
 </form>
+{% endif %}
