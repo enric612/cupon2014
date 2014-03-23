@@ -4,6 +4,8 @@ namespace Cupon\UsuarioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Cupon\UsuarioBundle\Entity\Usuario;
+use Cupon\UsuarioBundle\Form\Frontend\UsuarioType;
 
 class DefaultController extends Controller
 {
@@ -64,5 +66,23 @@ class DefaultController extends Controller
         return $this->render('UsuarioBundle:Default:compras.html.twig', array(
         	'compras' => $compras
         	));
+    }
+
+    public function registroAction()
+    {
+        $usuario = new Usuario();
+        $usuario->setPermiteEmail(true);
+        
+        $fechaNacimiento = new \DateTime('today - 18 years');
+        //$fechaNacimiento = $fechaNacimiento->format('d/m/Y');
+       
+        $usuario->setFechaNacimiento($fechaNacimiento);
+        
+        $formulario = $this->createForm(new UsuarioType(), $usuario);
+
+        return $this->render(
+            'UsuarioBundle:Default:registro.html.twig',
+            array('formulario' => $formulario->createView())
+            );
     }
 }

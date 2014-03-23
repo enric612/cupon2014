@@ -5,6 +5,9 @@
 <a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
 {# el usuario todavía no ha hecho login #}
 {% else %}
+<a class="boton" href="{{ path('usuario_registro') }}">Regístrate</a>
+
+
 <h2>Accede a tu cuenta</h2>
 <form action="{{ path('usuario_login_check') }}" method="post">
 	{% if error %}
