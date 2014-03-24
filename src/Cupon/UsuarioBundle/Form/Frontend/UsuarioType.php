@@ -52,7 +52,7 @@ class UsuarioType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Cupon\UsuarioBundle\Entity\Usuario',
-            'validation_groups' => array('default', 'registro'),
+            'validation_groups' => array('Default', 'registro'), //Por una puta minuscula no valida default debe ser Default 
             ));
     }
 

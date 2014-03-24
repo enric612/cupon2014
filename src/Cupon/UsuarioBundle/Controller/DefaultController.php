@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Cupon\UsuarioBundle\Entity\Usuario;
 use Cupon\UsuarioBundle\Form\Frontend\UsuarioType;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class DefaultController extends Controller
 {
@@ -70,6 +71,8 @@ class DefaultController extends Controller
 
     public function registroAction()
     {
+        $peticion = $this->getRequest();
+
         $usuario = new Usuario();
         $usuario->setPermiteEmail(true);
         
@@ -77,8 +80,48 @@ class DefaultController extends Controller
         //$fechaNacimiento = $fechaNacimiento->format('d/m/Y');
        
         $usuario->setFechaNacimiento($fechaNacimiento);
-        
+         
         $formulario = $this->createForm(new UsuarioType(), $usuario);
+
+        $formulario->handleRequest($peticion);
+
+        if($formulario->isValid())
+        {
+            $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
+
+            $usuario->setSalt(md5(time()));
+
+            $passwordCodicado = $encoder->encodePassword(
+                $usuario->getPassword(),
+                $usuario->getSalt()
+                );
+
+            //$usuario->setPassword($passwordCodicado);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($usuario);
+            $em->flush(); 
+
+            $this->get('session')->getFlashBag()->add('info',
+                '¡Enhorabuena! Te has registrado correctamente en Cupón'
+                );
+
+            $token = new UsernamePasswordToken(
+                $usuario,
+                $usuario->getPassword(),
+                'frontend',
+                $usuario->getRoles()
+                );
+
+            $this->container->get('security.context')->setToken($token);
+
+            return $this->redirect($this->generateUrl('portada', array(
+                'ciudad' => $usuario->getCiudad()->getSlug(),
+                'locale' => 'es_ES'
+                )));
+
+        }
 
         return $this->render(
             'UsuarioBundle:Default:registro.html.twig',

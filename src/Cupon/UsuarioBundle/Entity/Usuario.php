@@ -5,9 +5,13 @@ namespace Cupon\UsuarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Cupon\UsuarioBundle\Util\Util;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Usuario
  *
+ * 
+ * 
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Cupon\UsuarioBundle\Entity\UsuarioRepository")
  */
@@ -31,7 +35,7 @@ class Usuario implements UserInterface
     }
     public function __construct()
     {
-        $this->fecha_alta = new \DateTime();
+        $this->fechaAlta = new \DateTime('now');
     }
     /**
      * @var integer
@@ -46,6 +50,7 @@ class Usuario implements UserInterface
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=100)
+     * @Assert\NotBlank
      */
     private $nombre;
 
@@ -67,6 +72,7 @@ class Usuario implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\Length(min = "8")
      */
     private $password;
 
